@@ -3,11 +3,15 @@ package dbXtrs;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * Created by Fernando on 2015-05-04.
  */
 public class ftDB extends SQLiteOpenHelper {
+
+
+    private static final String LOGTAG = "ftpha - sca c r ";
 
     private static final String DB_Name = "ftKIT.db";
     private static final int DB_V = 1;
@@ -73,17 +77,36 @@ public class ftDB extends SQLiteOpenHelper {
 
 
 
-    public ftDB(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+    public ftDB(Context context) {
+        super(context, DB_Name, null, DB_V);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
 
+        db.execSQL(CREATE_USER);
+        db.execSQL(CREATE_CAT);
+        db.execSQL(CREATE_LIST);
+
+        Log.i(LOGTAG, T_USERS + "  Created");
+        Log.i(LOGTAG, T_CATS + "  Created");
+        Log.i(LOGTAG, T_LISTS + "  Created");
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+        db.execSQL("drop if exists " + T_USERS);
+        db.execSQL("drop if exists " + T_CATS);
+        db.execSQL("drop if exists " + T_LISTS);
+
+
+        Log.i(LOGTAG, T_USERS + "  Droped");
+        Log.i(LOGTAG, T_CATS + "  Droped");
+        Log.i(LOGTAG, T_LISTS + "  Droped");
+
+        onCreate(db);
 
     }
 }
