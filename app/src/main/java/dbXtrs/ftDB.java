@@ -14,7 +14,7 @@ public class ftDB extends SQLiteOpenHelper {
     private static final String LOGTAG = "ftpha - sca c r ";
 
     private static final String DB_Name = "ftKIT.db";
-    private static final int DB_V = 1;
+    private static final int DB_V = 2;
 
     private static final String T_USERS = "users";
     private static final String U_C_ID = "uId";
@@ -23,7 +23,7 @@ public class ftDB extends SQLiteOpenHelper {
     private static final String U_C_EMAIL = "uEmail";
     private static final String U_C_ACTIVE = "uActive";
 
-    private static final String T_CATS = "users";
+    private static final String T_CATS = "categories";
     private static final String C_C_ID = "cId";
     private static final String C_C_NAME = "cName";
     private static final String C_C_FROM = "cFrom";
@@ -34,7 +34,7 @@ public class ftDB extends SQLiteOpenHelper {
     private static final String C_C_ACTIVE = "cActive";
     private static final String C_C_FK_USER = "uId";
 
-    private static final String T_LISTS = "users";
+    private static final String T_LISTS = "lists";
     private static final String L_C_ID = "lId";
     private static final String L_C_NAME = "lName";
     private static final String L_C_TEXT = "lText";
@@ -43,7 +43,7 @@ public class ftDB extends SQLiteOpenHelper {
 
     // Creations
     private static final String CREATE_USER =
-            "CREATE_TABLE " + T_USERS + " (" +
+            "CREATE TABLE " + T_USERS + " (" +
                     U_C_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     U_C_NAME +  " TEXT, " +
                     U_C_PHONE + " TEXT, " +
@@ -52,7 +52,7 @@ public class ftDB extends SQLiteOpenHelper {
 
     // Creations
     private static final String CREATE_CAT =
-            "CREATE_TABLE " + T_CATS + " (" +
+            "CREATE TABLE " + T_CATS + " (" +
                     C_C_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     C_C_NAME +  " TEXT, " +
                     C_C_FROM + " TEXT, " +
@@ -66,7 +66,7 @@ public class ftDB extends SQLiteOpenHelper {
 
     // Creations
     private static final String CREATE_LIST =
-            "CREATE_TABLE " + T_LISTS + " (" +
+            "CREATE TABLE " + T_LISTS + " (" +
                     L_C_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     L_C_NAME +  " TEXT, " +
                     L_C_TEXT + " TEXT, " +
@@ -97,9 +97,9 @@ public class ftDB extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
-        db.execSQL("drop if exists " + T_USERS);
-        db.execSQL("drop if exists " + T_CATS);
-        db.execSQL("drop if exists " + T_LISTS);
+        db.execSQL("drop table if exists " + T_USERS);
+        db.execSQL("drop table if exists " + T_CATS);
+        db.execSQL("drop table if exists " + T_LISTS);
 
 
         Log.i(LOGTAG, T_USERS + "  Droped");
