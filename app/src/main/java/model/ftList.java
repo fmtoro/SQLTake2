@@ -9,19 +9,19 @@ public class ftList {
 
 
 
-    private int         lId;
+    private long         lId;
     private String      lName;
     private String      lText;
-    private int         cId;
+    private long         cId;
 
     public ftList() {
     }
 
-    public int getLId() {
+    public long getLId() {
         return lId;
     }
 
-    public void setLId(int lId) {
+    public void setLId(long lId) {
         this.lId = lId;
     }
 
@@ -41,11 +41,11 @@ public class ftList {
         this.lText = lText;
     }
 
-    public int getCId() {
+    public long getCId() {
         return cId;
     }
 
-    public void setCId(int cId) {
+    public void setCId(long cId) {
         this.cId = cId;
     }
 

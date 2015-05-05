@@ -5,7 +5,7 @@ package model;
  */
 public class User {
 
-    private int uId;
+    private long uId;
     private String uName;
     private String uPhone;
     private String uEmail;
@@ -13,11 +13,11 @@ public class User {
     public User() {
     }
 
-    public int getUId() {
+    public long getUId() {
         return uId;
     }
 
-    public void setUId(int uId) {
+    public void setUId(long uId) {
         this.uId = uId;
     }
 

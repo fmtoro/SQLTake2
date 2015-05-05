@@ -5,25 +5,26 @@ package model;
  */
 public class Cat {
 
-    private int cId;
+    private long cId;
     private String cName;
     private String cFrom;
     private String cTo;
+    private String cUnit;
     private String cSMS;
     private String cEmail;
     private boolean cJustMF;
     private boolean cActive;
-    private int uId;
+    private long uId;
 
 
     public Cat() {
     }
 
-    public int getCId() {
+    public long getCId() {
         return cId;
     }
 
-    public void setCId(int cId) {
+    public void setCId(long cId) {
         this.cId = cId;
     }
 
@@ -49,6 +50,14 @@ public class Cat {
 
     public void setCTo(String cTo) {
         this.cTo = cTo;
+    }
+
+    public String getCUnit() {
+        return cUnit;
+    }
+
+    public void setCUnit(String cUnit) {
+        this.cUnit = cUnit;
     }
 
     public String getCSMS() {
@@ -83,11 +92,11 @@ public class Cat {
         this.cActive = cActive;
     }
 
-    public int getUId() {
+    public long getUId() {
         return uId;
     }
 
-    public void setUId(int uId) {
+    public void setUId(long uId) {
         this.uId = uId;
     }
 
