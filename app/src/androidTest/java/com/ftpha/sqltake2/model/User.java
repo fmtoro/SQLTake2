@@ -10,6 +10,9 @@ public class User {
     private String uPhone;
     private String uEmail;
 
+    public User() {
+    }
+
     public int getUId() {
         return uId;
     }

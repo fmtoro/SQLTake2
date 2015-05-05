@@ -1,26 +1,23 @@
 package com.ftpha.sqltake2;
 
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import dbXtrs.dsUsers;
-import dbXtrs.ftDB;
+import dbXtrs.dsKit;
 
 
 public class MainActivity extends ActionBarActivity {
 
-    dsUsers dS;
+    dsKit dS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        dS = new dsUsers(this);
+        dS = new dsKit(this);
 
     }
 

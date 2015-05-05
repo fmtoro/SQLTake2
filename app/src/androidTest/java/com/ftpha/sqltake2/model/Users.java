@@ -7,13 +7,17 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
+ *
  * Created by Fernando on 2015-05-04.
+ * Originally created as part of: SQLTake2
+ * You will love this code and be awed by it's magnificence
+ *
  */
 public class Users {
 
     private List<User> users;
 
-    public List<User> users(){
+    public List<User> Users(){
 
         users = new ArrayList<User>();
         return users;

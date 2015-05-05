@@ -8,7 +8,7 @@ import android.util.Log;
 /**
  * Created by Fernando on 2015-05-04.
  */
-public class dsUsers {
+public class dsKit {
 
     private static final String LOGTAG = "ftpha - sca c r ";
 
@@ -16,7 +16,7 @@ public class dsUsers {
     SQLiteDatabase db;
 
 
-    public dsUsers(Context context){
+    public dsKit(Context context){
 
         dbH = new ftDB(context);
     }
