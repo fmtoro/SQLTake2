@@ -5,7 +5,7 @@ package com.ftpha.sqltake2.model;
  * Originally created as part of: SQLTake2
  * You will love this code and be awed by it's magnificence
  */
-public class List {
+public class ftList {
 
 
 
@@ -14,7 +14,7 @@ public class List {
     private String      lText;
     private int         cId;
 
-    public List() {
+    public ftList() {
     }
 
     public int getLId() {
