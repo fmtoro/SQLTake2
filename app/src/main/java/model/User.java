@@ -1,4 +1,4 @@
-package com.ftpha.sqltake2.model;
+package model;
 
 /**
  * Created by Fernando on 2015-05-04.

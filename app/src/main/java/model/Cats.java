@@ -1,4 +1,4 @@
-package com.ftpha.sqltake2.model;
+package model;
 
 import java.util.ArrayList;
 import java.util.Collection;
