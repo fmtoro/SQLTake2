@@ -12,8 +12,8 @@ public class Cat {
     private String cUnit;
     private String cSMS;
     private String cEmail;
-    private boolean cJustMF;
-    private boolean cActive;
+    private String cJustMF;
+    private String cActive;
     private long uId;
 
 
@@ -76,20 +76,20 @@ public class Cat {
         this.cEmail = cEmail;
     }
 
-    public boolean isCJustMF() {
-        return cJustMF;
-    }
-
-    public void setCJustMF(boolean cJustMF) {
-        this.cJustMF = cJustMF;
-    }
-
-    public boolean isCActive() {
+    public String getCActive() {
         return cActive;
     }
 
-    public void setCActive(boolean cActive) {
+    public void setCActive(String cActive) {
         this.cActive = cActive;
+    }
+
+    public String getCJustMF() {
+        return cJustMF;
+    }
+
+    public void setCJustMF(String cJustMF) {
+        this.cJustMF = cJustMF;
     }
 
     public long getUId() {

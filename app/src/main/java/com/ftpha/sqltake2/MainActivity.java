@@ -2,37 +2,93 @@ package com.ftpha.sqltake2;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.NumberPicker;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import dbXtrs.dsKit;
-import model.Cat;
-import model.User;
-import model.ftList;
 
 
 public class MainActivity extends ActionBarActivity {
 
     private static final String LOGTAG = "ftpha - sca c r ";
     dsKit dS;
+    NumberPicker nPk;
+    TextView tLg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        String[] nms = {"0","5","10","15","20","25","30","35","40"};
+        //nPk.
+
+        tLg = (TextView) findViewById(R.id.txtL);
+        nPk = (NumberPicker) findViewById(R.id.nPicker);
+
+
+        nPk.setMinValue(0);
+        nPk.setMaxValue(8);
+        //nPk.setValue(15);
+
+        nPk.setDisplayedValues(nms);
+        nPk.setWrapSelectorWheel(false);
+
+
+
+
+        nPk.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+
+            @Override
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                // TODO Auto-generated method stub
+
+//                String Old = "Old Value : ";
+//                String New = "New Value : ";
+
+                //tv1.setText(Old.concat(String.valueOf(oldVal)));
+                tLg.setText(String.valueOf(newVal*5));
+            }
+        });
+
+
         dS = new dsKit(this);
 
         dS.Open();
-        createUser(
+        dS.createUser(
                 "Cuela",
                 "1 438 346 7116",
                 "mariadanielaaleman@gmail.com");
-        createUser(
+        dS.createUser(
                 "Nela",
                 "1 438 555 1212",
                 "daniela.toro.a@gmail.com");
+
+        dS.createCat(
+                "You can",
+                "1",
+                "3",
+                "W",
+                "Y",
+                "Y",
+                "Y",
+                "Y",
+                1
+        );
+
+        dS.createList(
+                "Work",
+                "Work will come.",
+                1
+        );
     }
 
     @Override
@@ -72,50 +128,38 @@ public class MainActivity extends ActionBarActivity {
         dS.Close();
     }
 
-    private void createUser(String nom,
-                            String phone,
-                            String email){
-        User user = new User();
-        user.setUName(nom);
-        user.setUPhone(phone);
-        user.setUEmail(email);
-        user = dS.createUser(user);
-        Log.i(LOGTAG, "User created with Id: " + user.getUId());
+    public void onSendSMS(View view) {
+
+
+        EditText etPh = (EditText) findViewById(R.id.txtPhone);
+        EditText etMsg = (EditText) findViewById(R.id.txtMessage);
+
+        try {
+            SmsManager smsManager = SmsManager.getDefault();
+            for (int i = 1; i < 11; i++) {
+                smsManager.sendTextMessage(
+                    etPh.getText().toString(),
+                    null,
+                    etMsg.getText().toString() + "\n" + i,
+                    null,
+                    null);
+
+            }
+            Toast.makeText(
+                    MainActivity.this,
+                    "Was sent",
+                    Toast.LENGTH_LONG)
+                    .show();
+        } catch (Exception e) {
+            Log.i(LOGTAG, e.getMessage());
+            Toast.makeText(
+                    MainActivity.this,
+                    "No way",
+                    Toast.LENGTH_LONG)
+                    .show();
+
+        }
+
     }
 
-    private void createCat(String nom,
-                           String cFrom,
-                           String cTo,
-                           String cUnit,
-                           String cSMS,
-                           String cEmail,
-                           boolean cJustMF,
-                           boolean cActive,
-                           long uId){
-        Cat cat = new Cat();
-        cat.setCName(nom);
-        cat.setCFrom(cFrom);
-        cat.setCTo(cTo);
-        cat.setCUnit(cUnit);
-        cat.setCSMS(cSMS);
-        cat.setCEmail(cEmail);
-        cat.setCJustMF(cJustMF);
-        cat.setCActive(cActive);
-        cat.setUId(uId);
-        cat = dS.createCat(cat);
-        Log.i(LOGTAG, "Category created with Id: " + cat.getCId());
-    }
-
-    private void createList(
-            String nom,
-            String lText,
-            long cId){
-
-        ftList fTList = new ftList();
-        fTList.setLName(nom);
-        fTList.setLText(lText);
-        fTList.setCId(cId);
-        fTList = dS.createList(fTList);
-        Log.i(LOGTAG, "List created with Id: " + fTList.getCId());
-    }
 }
