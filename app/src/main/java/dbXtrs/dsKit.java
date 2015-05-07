@@ -11,7 +11,9 @@ import com.ftpha.sqltake2.MainActivity;
 
 import model.*;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 /**
  *
@@ -90,7 +92,6 @@ public class dsKit {
         user.setUId(insertUId);
 
         return user;
-
     }
 
 //    public User findUsers(){
@@ -98,8 +99,8 @@ public class dsKit {
 //
 //    }
 
-    public Users findAllUsers(){
-        Users users = new Users();
+    public List<User> findAllUsers(){
+        List<User> users = new ArrayList<User>();
 
         Cursor cursor = db.query(ftDB.T_USERS, allUTCs,null,null,null,null,null);
 
@@ -134,13 +135,40 @@ public class dsKit {
         values.put(ftDB.C_C_ACTIVE, cat.getCActive());
         values.put(ftDB.C_C_FK_USER, cat.getUId());
 
-        long insertCId = db.insert(ftDB.T_CATS, null,values );
+        long insertCId = db.insert(ftDB.T_CATS, null, values);
         cat.setCId(insertCId);
 
         return cat;
 
     }
 
+
+    public List<Cat> findAllCats(){
+        List<Cat> cats = new ArrayList<Cat>();
+
+        Cursor cursor = db.query(ftDB.T_CATS, allCTCs, null, null, null, null, null);
+
+        Log.i(LOGTAG, "Found " + cursor.getCount() + " rows in " + ftDB.T_CATS);
+
+        if (cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
+                Cat cat = new Cat();
+                cat.setCId(cursor.getLong(cursor.getColumnIndex(ftDB.C_C_ID)));
+                cat.setCName(cursor.getString(cursor.getColumnIndex(ftDB.C_C_NAME)));
+                cat.setCFrom(cursor.getString(cursor.getColumnIndex(ftDB.C_C_FROM)));
+                cat.setCTo(cursor.getString(cursor.getColumnIndex(ftDB.C_C_TO)));
+                cat.setCUnit(cursor.getString(cursor.getColumnIndex(ftDB.C_C_UNIT)));
+                cat.setCSMS(cursor.getString(cursor.getColumnIndex(ftDB.C_C_SMS)));
+                cat.setCEmail(cursor.getString(cursor.getColumnIndex(ftDB.C_C_EMAIL)));
+                cat.setCJustMF(cursor.getString(cursor.getColumnIndex(ftDB.C_C_JUST_MF)));
+                cat.setCActive(cursor.getString(cursor.getColumnIndex(ftDB.C_C_ACTIVE)));
+                cat.setUId(cursor.getLong(cursor.getColumnIndex(ftDB.C_C_FK_USER)));
+                cats.add(cat);
+            }
+        }
+
+        return cats;
+    }
 
     public ftList createList(ftList fTList){
 
@@ -150,11 +178,32 @@ public class dsKit {
         values.put(ftDB.L_C_TEXT, fTList.getLText());
         values.put(ftDB.L_C_FK_CAT , fTList.getCId()   );
 
-        long insertLId = db.insert(ftDB.T_LISTS, null,values );
+        long insertLId = db.insert(ftDB.T_LISTS, null, values);
         fTList.setLId(insertLId);
 
         return fTList;
 
+    }
+
+    public List<ftList> findAllLists(){
+        List<ftList> ftlists = new ArrayList<ftList>();
+
+        Cursor cursor = db.query(ftDB.T_USERS, allUTCs, null, null, null, null, null);
+
+        Log.i(LOGTAG, "Found " + cursor.getCount() + " rows in " + ftDB.T_USERS);
+
+        if (cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
+                ftList list = new ftList();
+                list.setLId(cursor.getLong(cursor.getColumnIndex(ftDB.L_C_ID)));
+                list.setLName(cursor.getString(cursor.getColumnIndex(ftDB.L_C_NAME)));
+                list.setLText(cursor.getString(cursor.getColumnIndex(ftDB.L_C_TEXT)));
+                list.setCId(cursor.getLong(cursor.getColumnIndex(ftDB.L_C_FK_CAT)));
+                ftlists.add(list);
+            }
+        }
+
+        return ftlists;
     }
 
 
@@ -168,6 +217,8 @@ public class dsKit {
         user = createUser(user);
         Log.i(LOGTAG, "User created with Id: " + user.getUId());
     }
+
+
 
     public void createList(
             String nom,
